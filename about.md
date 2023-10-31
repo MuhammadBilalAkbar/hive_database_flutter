@@ -28,7 +28,7 @@
 
 **Flutter Videos/Articles**
 
-- [https://pub.dev/packages/hive]
+- https://pub.dev/packages/hive
 
 **Android/Swift/React Videos**
 
