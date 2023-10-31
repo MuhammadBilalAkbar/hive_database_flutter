@@ -66,8 +66,18 @@
 
 **Android/Swift/React Videos**
 
-- _[Add here the high ranking video links that have many views, or are ranked high on YouTube ...]_
-- _[e.g. 380K: https://www.youtube.com/watch?v=Nl54MJDR2p8]_
+- https://www.educba.com/jdbc-hive/
+- https://www.tencentcloud.com/document/product/1026/31147
+- https://sparkbyexamples.com/apache-hive/hive-create-database-from-java-example/
+- https://www.javatpoint.com/nosql-databases
+- https://thenewstack.io/getting-started-with-nosql-and-java/
+- https://www.alachisoft.com/resources/articles/client-java-api-nosql.html
+- https://developer.okta.com/blog/2017/09/08/nosql-options-for-java-developers
+- https://www.javacodegeeks.com/nosql-tutorials
+- https://dzone.com/articles/nosql-options-for-java-developers
+- https://medium.com/kodein-koders/announcing-a-painless-kotlin-multiplatform-nosql-embedded-database-30fed677549c
+- https://www.mongodb.com/developer/products/realm/announcing-realm-kotlin-beta/
+- 
 
 **Great Features**
 
@@ -90,6 +100,70 @@ _[Add here the great features & things that are showcased well from the videos a
   Lamborghini, he should get wallpapers of only Lamborghini and not other cars and wallpapers<br/>
   **Answer**: add keywords field in the database, and from search field search the keywords field in
   database
+- **Question**: Does it support windows? And can I back up my data and load it on another
+  platform?<br/>
+  **Answer**: yes it support windows ⚡ and if you want to back up your data, you will have to save
+  them in a server and get them from the other device and it should work fine
+- **Question**: sir can you tell me difference between 1 and 2:
+
+1. ```dart
+   Directory directory = await pathProvider.getApplicationDocumentsDirectory();
+   Hive.init(directory.path);
+   ```
+
+2. ```dart
+   await Hive.initFlutter();
+   ```
+
+**Answer**: Both are the same. The first one can be user without Flutter and the second is made for
+Flutter. The second one will handle the directory behind the scene for you 👏 Hope this help ⚡️.
+
+- **Question**: Is there an actual way to connect hive with other forms of cloud databases like for
+  example firestore or even MySQL, or do I have to implement them separately?<br/>
+  **Answer**: Hive sits in the app itself, mysql is in the server side. So they are different ideas.
+  There's not direct connection.
+
+- **Question**: Is hive able to handle millions of Objects, is there a limit?<br/>
+  **Answer**: Follow this
+  link: https://stackoverflow.com/questions/64020930/can-hive-in-flutter-store-bigdatasome-gb-files
+
+- **Question**: Now, can anyone comment why store data locally if you can use the cloud?<br/>
+  **Answer**: There are multiple scenarios
+    - In case internet is not connected and still you wanna show some data
+    - Loading from local is way faster then loading from cloud so in case there is some repetition
+      of loading data you can store it locally
+    - In case you just want to make a application with no need of cloud other than storing data. You
+      can use local DB and many more
+
+- **Question**: is it possible to use Hive with out the adapters? Is there any specific reason why
+  adapters are needed?<br/>
+  **Answer**: Follow this
+  link: https://medium.com/flutter-community/storing-local-data-with-hive-and-provider-in-flutter-a49b6bdea75a
+
+- **Question**: how can i fill the box with default data that i can update in the future?<br/>
+  **Answer**: Follow this
+  link: https://www.youtube.com/redirect?event=comments&redir_token=QUFFLUhqbDhYdDB3LXJaaXJ3YnZ5cFlKQXhOWkl5TjZWQXxBQ3Jtc0ttSGhNbGJ4YkJZalhzc09CNGJPdUhBdkRpbmZ1RE5BRldHT3ZWYXI1SkVHSTY1YUsyQWdnemctek5GWjhxVTdLSG5EM1huYjdoZTRTcVJOaElQYWZ2U3U5dUNBWFN3dlN2emw4Y3FHUGZmbDYtbklCVQ&q=https%3A%2F%2Fmedium.com%2Fflutter-community%2Fstoring-local-data-with-hive-and-provider-in-flutter-a49b6bdea75a&stzid=UgzNYHyNTxf-sGr6UK14AaABAg.9enHBQ6G-Xn9eprImXhZqq
+
+- **Question**: For more complex database operations sqlfite is best over hive can you please
+  explain me how?<br/>
+  **Answer**: Follow this
+  link: https://blog.codemagic.io/choosing-the-right-database-for-your-flutter-app/
+
+- **Question**: How can we add a list<myobject> in the model class in hive? Do we have to register
+  an adapter for the myobject class as well as for the model class? Is the way of registering
+  adapter for myobject similiar to that of model class?<br/>
+  **Answer**: Follow this
+  link: https://www.youtube.com/redirect?event=comments&redir_token=QUFFLUhqbmduMEtUbnp2ZEo2bWJnSWJMdXFrZkNFVXd3Z3xBQ3Jtc0tuTk1GUDVHQi1TTjI1ckFmb2NUUG5md2tYcHo0V1BjMEV6clpHd0g1MzI3VEV6YUdrZnUtQU1vT3JURnZmYTlkMWJabU5SSlViYjUwSVpiY3pKZkFSWEpiMjI5aGRrZzhwXzY1RnhEc0pzLTNGbHBBdw&q=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F59413228%2Fhow-to-save-a-listobject-and-retrieve-using-hive&stzid=UgwglGHrnZ4bMzHfnaR4AaABAg.9QW7n5lzCB-9cc_FNVp3gE
+
+- **Question**: Would it be good to use hive DB with search delegate?<br/>
+  **Answer**: Follow this
+  link: https://viveky259259.medium.com/hive-for-flutter-1-when-why-database-cea0013c9fc1
+
+- **Question**: Does anyone know how to show only part of the values contained in the box based on a
+  word search?<br/>
+  **Answer**: Follow this
+  link: https://stackoverflow.com/questions/64272936/how-to-filter-hive-data-in-flutter-by-data-values
+
 **Problems from Flutter Stackoverflow**
 
 - _[Add here any links to problems people face with this topic ...]_
