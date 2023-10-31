@@ -1,17 +1,34 @@
-## 1. Research: Project Title
+## 1. Research: Hive Database in Flutter
 
 - Keywords:
-    - _[Add here a list of important keywords about the topic]_
-    - ...
-- Video Title: _[Add here a short, interesting and descriptive title for the video that contains high ranking keywords]_
+    - Hive database in flutter
+    - Hive database flutter tutorial
+    - hive in flutter
+    - hive database flutter
+    - Hive database flutter github
+    - hive flutter pub dev
+    - Hive database flutter example
+    - hive_generator
+    - hive generator flutter
+    - hive docs
+    - hive generator github
+    - hive flutter
+    - hive flutter pub dev
+    - hive generator flutter github
+    - hive generator command
+    - flutter hive vs sqlite
+    - hive database tutorial
+    - hive flutter documentation
+    - flutter hive example
+    - hive flutter example
+- Video Title: Hive Database in Flutter with Hive Generator and Example
 
 
 ## 2. Research: Competitors
 
 **Flutter Videos/Articles**
 
-- _[Add here the high ranking video links that have many views, or are ranked high on YouTube, Google ...]_
-- _[e.g. 380K: https://www.youtube.com/watch?v=Nl54MJDR2p8]_
+- [https://pub.dev/packages/hive]
 
 **Android/Swift/React Videos**
 
