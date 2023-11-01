@@ -77,15 +77,40 @@
 - https://dzone.com/articles/nosql-options-for-java-developers
 - https://medium.com/kodein-koders/announcing-a-painless-kotlin-multiplatform-nosql-embedded-database-30fed677549c
 - https://www.mongodb.com/developer/products/realm/announcing-realm-kotlin-beta/
-- 
+- https://www.couchbase.com/
+- https://github.com/couchbaselabs/TouchDB-iOS
+- https://github.com/daleharvey/pouchdb
+- https://rxdb.info/react-native-database.html#:~:text=RxDB%20is%20an%20offline%2Dfirst,single%20field%20of%20a%20document.
+- https://blog.codemagic.io/choosing-the-right-database-for-react-native-app/
+- https://taglineinfotech.com/react-native-database/
+- https://medium.com/@dubaidevmarketing/top-10-local-databases-for-react-native-app-development-in-2023-5944bb58042e
+- https://www.mindinventory.com/blog/top-react-native-databases/
+- 35K: https://youtu.be/6QnY7Ri_ORw?si=6uosS2YnP60asBAZ
+- Playlist: https://www.youtube.com/watch?v=hainZwgvGYY&list=PLVz2XdJiJQxyxZK0ggHweWODoVTkXsWUA
+- 891K: https://www.youtube.com/watch?v=0buKQHokLK8&pp=ygUTbm9zcWwgZGF0YWJhc2UgamF2YQ%3D%3D
+- Playlist: https://www.youtube.com/watch?v=qEhNHOEa5sE&list=PLsyeobzWxl7r0bn6dzVA8bQNxcx7DRl5F
+- 10K: https://www.youtube.com/watch?v=hainZwgvGYY&pp=ygUTbm9zcWwgZGF0YWJhc2UgamF2YQ%3D%3D
+- 104K: https://www.youtube.com/watch?v=B3gJT3t8g4Q&pp=ygUTbm9zcWwgZGF0YWJhc2UgamF2YQ%3D%3D
+- Playlist: https://www.youtube.com/watch?v=sDW0Ws6qPew&list=PLKCk3OyNwIzvBhDy_78WhhO6SxdWKedP5
+- 178: https://www.youtube.com/watch?v=C79MJTyuJvE&pp=ygUUbm9zcWwgZGF0YWJhc2Ugc3dpZnQ%3D
+- 4.6K: https://www.youtube.com/watch?v=3GzN4KFEf7c&pp=ygUbbm9zcWwgZGF0YWJhc2UgcmVhY3QgbmF0aXZl
+- 12K: https://www.youtube.com/watch?v=5zdX76N3iq0&pp=ygUbbm9zcWwgZGF0YWJhc2UgcmVhY3QgbmF0aXZl
 
 **Great Features**
 
--
-
-_[Add here the great features & things that are showcased well from the videos above, if it is about UI you could also attach screenshots]_
-
-- _..._
+- Hive is lightweight and efficient NoSQL database solution for Flutter with fast key-value database
+  written in pure Dart.
+- It is strongly encrypted using AES-256.
+- Hive is known for its exceptional performance.
+- It's designed for local data storage on the device for storing data without network connectivity
+  requirements.
+- Hive supports storing various data types directly without requiring complex data conversion. This
+  includes primitives, lists, maps, and user-defined models.
+- Hive supports type safety, ensuring that data is stored and retrieved with proper types,
+  preventing issues related to data type mismatches.
+- Hive doesn't require Object-Relational Mapping (ORM) tools.
+- Hive uses efficient serialization and deserialization methods.
+- Data is organized within Hive Boxes, similar to collections.
 
 **Problems from Videos**
 
@@ -166,31 +191,40 @@ Flutter. The second one will handle the directory behind the scene for you 👏 
 
 **Problems from Flutter Stackoverflow**
 
-- _[Add here any links to problems people face with this topic ...]_
-- _[Add stackoverflow links "Flutter [Your Topic] not working" etc. ...]_
+- https://stackoverflow.com/questions/74951242/getting-an-error-of-register-adapter-in-flutter-using-hive
+- https://stackoverflow.com/questions/71661803/flutter-hive-hive-boxes-are-cleared-but-then-data-is-restored-on-restart
+- https://stackoverflow.com/questions/64944999/how-to-solve-the-box-not-found-error-hive-flutter
+- https://stackoverflow.com/questions/72548100/iam-having-a-problem-with-adding-fields-in-a-hive-model-in-flutter
+- https://stackoverflow.com/questions/67325665/error-retrieving-data-from-hive-in-flutter-listdynamic-is-not-a-subtype-of
+- https://stackoverflow.com/questions/73378909/flutter-hive-dead-lock-code-needs-an-adapter-class-to-run-but-that-adapter
+- https://stackoverflow.com/questions/61832322/problem-while-flutter-build-runner-register-generator-for-using-the-hive-databas
+- https://stackoverflow.com/questions/70614042/flutter-hive-box-not-found-even-though-it-was-opened
+- https://stackoverflow.com/questions/67298056/using-hive-boxuser-throws-the-error-the-box-user-is-already-open-and-of-ty
+- https://stackoverflow.com/questions/68717933/flutter-path-provider-package-error-with-hive-database-and-null-safety
+- https://stackoverflow.com/questions/72546957/when-i-implement-hive-library-for-save-theme-mode-i-have-null-error
+- https://stackoverflow.com/questions/61485627/unable-to-use-hive-plugin-in-flutter
+- https://stackoverflow.com/questions/60257233/the-box-contacts-is-already-open-and-of-type-boxcontact-when-trying-to-acces
+- https://stackoverflow.com/questions/74653907/unhandled-exception-hiveerror-you-need-to-initialize-hive-or-provide-a-path-to
+- https://stackoverflow.com/questions/77060962/hive-type-null-is-not-a-subtype-of-type-string-in-type-cast
+- https://stackoverflow.com/questions/74713206/save-data-from-json-with-flutter-hive
+- https://stackoverflow.com/questions/75901446/facing-rangeerror-not-enough-bytes-available-when-i-try-to-get-values-from-h
+- https://stackoverflow.com/questions/74738686/not-able-to-change-the-postion-of-items-in-hive-database
+- https://stackoverflow.com/questions/74684235/flutter-unhandled-exception-platformexceptionchannel-error-unable-to-establ
 
 ## 3. Video Structure
 
 **Main Points / Purpose Of Lesson**
 
-1. _[Why is it useful for the viewer to learn more about what we teach in this video lesson?]_
-2. _[What are the main points of this video lesson]_
-    - _[Add here multiple main points ...]_
-    - _[...]_
-3.
-
-_[Out of 1. & 2. create 2-3 sentences that could be later used for recording the introduction of this video lesson]_
+1. Hive, a NoSQL, lightweight, and high-performance database for Flutter, offers several advantages
+   like Performance, Local Storage, Efficient Data Handling, Simplicity and Ease of Use, Type
+   Safety, and No ORMs Required.
+2. Main points:
+    - Add notes
+    - Edit notes
+    - Delete notes
+3. In this video, you will learn how to use hive database with boxes and type adapters.
 
 **The Structured Main Content**
 
-1.
-
-_[Add here the main topics the video project is covering in chronological order. For each topic add the main points how this lesson can be taught step by step to beginners who never did anything related to what this lesson is about]_
-
-2. _[e.g. for this video project: https://www.youtube.com/watch?v=MSv38jO4EJk]_
-    - _[1. Setup Android & iOS]_
-        - _[Add for each topic more detailed steps ...]_
-        - _[...]_
-    - _[2. Pick Image From Gallery]_
-    - _[3. Pick Image From Camera]_
-    - _[4. Persist Images To Local Storage]_
+1. First of all, visit [docs.hivedb.dev](https://docs.hivedb.dev/) to have a quick overview that how
+   to use hive database for flutter.
