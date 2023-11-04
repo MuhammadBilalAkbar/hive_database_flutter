@@ -56,8 +56,9 @@
 - https://priiimo.com/en/computer-science/tutorials/easy-guide-to-use-hive-db-with-flutter/5f1921a77b5fef058be6ff78
 - https://morioh.com/a/f124fd15bb64/flutter-web-and-hive-or-using-hive-in-flutter-web
 - https://copyprogramming.com/howto/flutter-dart-export-hive-saved-data-to-file-to-retrieve-later
+- 96K: https://youtu.be/R1GSrrItqUs
 - 7.9K - Playlist: https://youtu.be/mKTmzdXLdH4?list=PLFyjjoCMAPtyQAnT6GilOjctmtTLBOZf4
-- 29K: https://youtu.be/ee2RUDriM5g
+- 30K: https://youtu.be/ee2RUDriM5g
 - 89K: https://youtu.be/w8cZKm9s228
 - 15K: https://youtu.be/xN_OTO5EYKY
 - 49K: https://youtu.be/L-oUzgxOfdY
@@ -217,7 +218,7 @@ Flutter. The second one will handle the directory behind the scene for you 👏 
 
 1. Hive, a NoSQL, lightweight, and high-performance database for Flutter, offers several advantages
    like Performance, Local Storage, Efficient Data Handling, Simplicity and Ease of Use, Type
-   Safety, and No ORMs Required.
+   Safety, and No ORMs Required. Hive supports all platforms supported by Flutter.
 2. Main points:
     - Add notes
     - Edit notes
@@ -226,5 +227,283 @@ Flutter. The second one will handle the directory behind the scene for you 👏 
 
 **The Structured Main Content**
 
-1. First of all, visit [docs.hivedb.dev](https://docs.hivedb.dev/) to have a quick overview that how
-   to use hive database for flutter.
+# 1. Official documentation:
+
+First of all, visit [docs.hivedb.dev](https://docs.hivedb.dev/) to have a quick overview that how to
+use hive database for flutter.
+
+# 2. Add dependencies in pubspec.yaml file:
+
+According to [docs](https://docs.hivedb.dev/#/?id=add-to-project), add following packages with their
+latest version in your project's pubspec.yaml file:
+
+- `hive` and `hive_flutter` in dependencies section
+- `build_runner` and `hive_generator` in dev_dependencies section
+
+# 3. Initialize hive database in flutter app
+
+Before you can open a box, Hive needs to know where it can store its data. You can use the
+`path_provider` package to get a valid directory.
+
+The `hive_flutter` package provides the `Hive.initFlutter()` extension method which handles
+everything for you.
+
+# 4. What are boxes?
+
+All of your data is stored in boxes. A box can be compared to a table in SQL, but it does not
+have a structure and can contain anything.
+
+### Open a box:
+
+- Before you can use a box, you have to open it. For regular boxes, this loads all of its data
+  from the local storage into memory for immediate access.
+- For a small app, a single box might be enough. For more advanced problems, boxes are a great
+  way to organize your data. Boxes can also be encrypted to store sensitive data.
+- You can access it using `openBox` method of Hive database:
+
+```dart
+await Hive.openBox('boxName');
+```
+
+When you open a box, you can specify that it may only contain values of a specific type. For example
+a notes box could be opened like this:
+
+```dart
+await Hive.openBox<NotesModel>('notes');
+```
+
+- E is type parameter which tells the type of the values in the box.
+- openBox has multiple parameters like:
+    - name is positional parameter and the name of box which specifies the storage location and is
+      used to check if a box already exists. It is case-insensitive.
+    - All other parameters are named like encryptionCipher, keyComparator, compactionStrategy,
+      crashRecovery, path, bytes, collection, encryptionKey.
+
+- If the box is already open, it is returned immediately and all supplied parameters are ignored.
+- Once you obtained a box instance, you can read, write, and delete entries.
+- To get the singleton instance of an already opened box, you may call:
+
+```dart
+Hive.open<E>('boxName');
+```
+
+### Close a box
+
+When you close a Hive box, you are essentially telling Hive that you are no longer using it. Hive
+will then flush any pending changes to disk and free up the resources used by the box. This includes
+the box's data, which is kept in memory for performance reasons.
+
+If you don't need a box again, you should close it. All cached keys and values of the box will be
+dropped from memory and the box file is closed after all active read and write operations finished.
+
+### Read from box:
+
+Reading from a box is very easy:
+
+```dart
+var box = Hive.box('myBox');
+
+String name = box.get('name');
+
+DateTime birthday = box.get('birthday');
+```
+
+If the key does not exist, null is returned. Optionally you can specify a defaultValue that is
+returned in case the key does not exist.
+
+```dart
+double height = box.get('randomKey', defaultValue: 17.5);
+```
+
+### Write to a box:
+
+Writing to a box is almost like writing to a map:
+
+```dart
+var box = Hive.box('myBox');
+
+box.put('name', 'Paul');
+
+box.put('friends', ['Dave', 'Simon', 'Lisa']);
+
+box.put(123, 'test');
+
+box.putAll({'key1': 'value1', 42: 'life'});
+```
+
+The changes are written to the disk as soon as possible in the background but all listeners are
+notified immediately. If the async operation fails (which it should not), all listeners are notified
+again with the old values.
+
+If you want to make sure that a write operation is successful, just await its Future.
+
+### Delete a box:
+
+When you delete a Hive box, you are telling Hive to remove the box and all of its data from disk.
+This is a permanent operation, and there is no way to recover the deleted data.
+
+If you want to change an existing value, you can either override it using for example `put()` or
+delete it.
+
+If the key does not exist, no disk access is needed and the returned Future finishes immediately.
+
+Writing `null` is **NOT** the same as deleting a value.
+
+##### Difference between close and delete of a box is that:
+
+**close** free up the resources used by the box. It includes the box's data, which is kept in memory
+for high performance reasons.
+**delete** box and its data will be permanently removed, and the operation cannot be undone.
+
+# 5. Use hive database in flutter:
+
+Hive supports all platforms supported by Flutter.
+
+### Initialize flutter apps:
+
+Before you can open a box, Hive needs to know where it can store its data. Android and iOS have very
+strict rules for allowed directories. You can use the `path_provider` package to get a valid
+directory.
+
+The `hive_flutter` package provides the `Hive.initFlutter()` extension method which handles
+everything for you.
+
+### ValueListenable
+
+If you want your widgets to refresh based on the data stored in Hive, you can use
+the `ValueListenableBuilder`. The `box.listenable()` method provides a `ValueListenable`.
+
+If a widget only depends on specific keys in your box, you can provide the `keys` parameter
+to `listenable` method. It is good practice to refresh widgets only if necessary.
+
+### Auto increment & indices
+
+We already know that Hive supports unsigned integer keys. You can use auto-increment keys if you
+like. This is very useful for storing and accessing multiple objects. You can use a Box like a list.
+
+```dart
+import 'package:hive/hive.dart';
+
+void main() async {
+  var friends = await Hive.openBox('friends');
+  friends.clear();
+
+  friends.add('Lisa');            // index 0, key 0
+  friends.add('Dave');            // index 1, key 1
+  friends.put(123, 'Marco');      // index 2, key 123
+  friends.add('Paul');            // index 3, key 124
+
+  print(friends.getAt(0));
+  print(friends.get(0));
+  
+  print(friends.getAt(1));
+  print(friends.get(1));
+  
+  print(friends.getAt(2));
+  print(friends.get(123));
+  
+  print(friends.getAt(3));
+  print(friends.get(124));
+}
+```
+
+There are also `getAt()`, `putAt()` and `deleteAt()` methods to access or change values by their
+index.
+
+# 6. Custom Objects:
+
+### TypeAdapters:
+
+Hive supports all primitive types but TypeAdapters allow you to store any object that that allows
+you to store and retrieve any object that you want. TypeAdapter serves as a bridge between custom
+data types in Dart and the Hive database.
+
+You can either write a TypeAdapter yourself or generate it. Most of the time the generated adapter
+will perform really good. Sometimes there are small things you can improve with a manually written
+adapter.
+
+### Register Adapter:
+
+When you want Hive to use a TypeAdapter, you have to register it.
+
+- Two things are needed for that, An instance of the adapter and a typeId:
+- Every type has a unique `typeId` which is used to find the correct adapter when a value is brought
+  back from disk.
+- All `typeIds` between 0 and 223 are allowed.
+- Make sure to use typeIds consistently. Your changes have to be compatible to previous versions of
+  the box.
+- You can provide default values to properties and fields by providing `defaultValue` argument to
+  `@HiveField` annotation.
+- It's recommended to register all TypeAdapters before opening any boxes.
+
+### Generate Adapter:
+
+The `hive_generator` package can automatically generate `TypeAdapters` for almost any class.
+
+- To generate a TypeAdapter for a class, annotate it with `@HiveType` and provide a `typeId` (
+  between
+  0 and 223).
+- Annotate all fields which should be stored with `@HiveField`.
+- Run build task
+  ```dart
+  flutter packages pub run build_runner build
+  ```
+- Register the generated adapter.
+
+# 7. Practical Example:
+
+- Inside models folder, let's create `notes_model.dart` file. In this file, let's create NotesModel
+  class and extend it from `HiveObject`, annotate this class with `@HiveType(typeId:0)`:
+
+```dart
+import 'package:hive/hive.dart';
+
+part 'notes_model.g.dart';
+
+@HiveType(typeId: 0)
+class NotesModel extends HiveObject {
+  @HiveField(0)
+  String title;
+
+  @HiveField(1)
+  String description;
+
+  NotesModel({required this.title, required this.description});
+}
+```
+
+- Then run following command in terminal to generate `NotesModelAdapter` class:
+   ```dart
+   flutter packages pub run build_runner build
+   ```
+- Inside `main.dart`, do widgets binding and initialize hive database.
+    - As we have our own type of box so register it by calling `registerAdapter()` method of hive.
+    - After registration, open this box.
+
+```dart
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Hive.initFlutter(); // -> not needed in browser
+
+  Hive.registerAdapter(NotesModelAdapter());
+
+  await Hive.openBox<NotesModel>('notes');
+
+  runApp(const MyApp());
+}
+```
+
+- Inside `home_screen.dart` file, we are using `ValueListenableBuilder` to refresh data stored in
+  Hive. It has two required parameters:
+    - `valueListenable`. We are providing box of type NotesModel and calling `listenable` method of
+      hive database.
+    - `builder`. Here we are using listview builder and returning `Card` in the `itemBuilder`.
+    - Add button adds the notes box with title and description by calling `.add()` method of hive
+      database on box.
+    - Update button updates the notes box by using `.save()` method of hive database on box.
+    - Delete button deletes the notes box by using `data[index].delete();` method of hive database
+      on box. Where data is following:
+  ```dart
+  final data = box.values.toList().cast<NotesModel>();
+  ``` 

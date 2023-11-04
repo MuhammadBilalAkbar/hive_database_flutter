@@ -7,7 +7,7 @@ import 'home_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Hive.initFlutter();
+  await Hive.initFlutter(); // -> not needed in browser
 
   Hive.registerAdapter(NotesModelAdapter());
 

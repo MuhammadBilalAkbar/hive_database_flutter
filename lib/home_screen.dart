@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '/boxes/boxes.dart';
 import '/models/notes_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -14,6 +13,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
 
+  static Box<NotesModel> notes() => Hive.box<NotesModel>('notes');
+
   @override
   void dispose() {
     Hive.close();
@@ -27,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: const Text('Hive Database'),
         ),
         body: ValueListenableBuilder<Box<NotesModel>>(
-          valueListenable: Boxes.getData().listenable(),
+          valueListenable: notes().listenable(),
           builder: (context, box, _) {
             final data = box.values.toList().cast<NotesModel>();
             return ListView.builder(
@@ -76,6 +77,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
+            // var box = await Hive.openBox('testBox');
+            // box.put('name', 'David');
+            // debugPrint('Name: ${box.get('name')}');
+
             createNoteDialog();
           },
           child: const Icon(Icons.add),
@@ -168,7 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           TextButton(
-            onPressed: () {
+              onPressed: () {
               Navigator.pop(context);
             },
             child: const Text('Cancel'),
@@ -180,12 +185,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 description: descriptionController.text,
               );
 
-              final box = Boxes.getData();
-              box.add(data);
+              notes().add(data);
               // box.put('myKey',data);
 
               // data.save();
-              debugPrint(box.length.toString());
+              debugPrint(notes().length.toString());
 
               titleController.clear();
               descriptionController.clear();
