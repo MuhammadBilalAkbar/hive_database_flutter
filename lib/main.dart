@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/models/notes_model.dart';
+import '/models/note.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'home_screen.dart';
@@ -7,11 +7,10 @@ import 'home_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Hive.initFlutter(); // -> not needed in browser
+  await Hive.initFlutter();
 
-  Hive.registerAdapter(NotesModelAdapter());
-
-  await Hive.openBox<NotesModel>('notes');
+  Hive.registerAdapter(NoteAdapter());
+  await Hive.openBox<Note>('notes');
 
   runApp(const MyApp());
 }

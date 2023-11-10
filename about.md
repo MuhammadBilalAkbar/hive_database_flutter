@@ -57,13 +57,13 @@
 - https://morioh.com/a/f124fd15bb64/flutter-web-and-hive-or-using-hive-in-flutter-web
 - https://copyprogramming.com/howto/flutter-dart-export-hive-saved-data-to-file-to-retrieve-later
 - 96K: https://youtu.be/R1GSrrItqUs
-- 7.9K - Playlist: https://youtu.be/mKTmzdXLdH4?list=PLFyjjoCMAPtyQAnT6GilOjctmtTLBOZf4
+- 8.1K - Playlist: https://youtu.be/mKTmzdXLdH4?list=PLFyjjoCMAPtyQAnT6GilOjctmtTLBOZf4
 - 30K: https://youtu.be/ee2RUDriM5g
 - 89K: https://youtu.be/w8cZKm9s228
-- 15K: https://youtu.be/xN_OTO5EYKY
-- 49K: https://youtu.be/L-oUzgxOfdY
-- 2K - Playlist: https://youtu.be/dDd82p3xFpA?list=PLztm2TugcV9TlPg1BqY9D-zv_xo80Q4bp
-- 44K: https://youtu.be/FB9GpmL0Qe0
+- 16K: https://youtu.be/xN_OTO5EYKY
+- 50K: https://youtu.be/L-oUzgxOfdY
+- 2.1K - Playlist: https://youtu.be/dDd82p3xFpA?list=PLztm2TugcV9TlPg1BqY9D-zv_xo80Q4bp
+- 45K: https://youtu.be/FB9GpmL0Qe0
 
 **Android/Swift/React Videos**
 
@@ -269,7 +269,7 @@ When you open a box, you can specify that it may only contain values of a specif
 a notes box could be opened like this:
 
 ```dart
-await Hive.openBox<NotesModel>('notes');
+await Hive.openBox<Note>('notes');
 ```
 
 - E is type parameter which tells the type of the values in the box.
@@ -292,6 +292,14 @@ Hive.open<E>('boxName');
 When you close a Hive box, you are essentially telling Hive that you are no longer using it. Hive
 will then flush any pending changes to disk and free up the resources used by the box. This includes
 the box's data, which is kept in memory for performance reasons.
+
+`Hive.close()` closes the entire Hive database(all open boxes).
+`Hive.box('boxName').close()` is specific to a particular box within the Hive database.
+
+```dart
+    Hive.close();
+    // Hive.box('boxName').close();
+```
 
 If you don't need a box again, you should close it. All cached keys and values of the box will be
 dropped from memory and the box file is closed after all active read and write operations finished.
@@ -452,31 +460,32 @@ The `hive_generator` package can automatically generate `TypeAdapters` for almos
 
 # 7. Practical Example:
 
-- Inside models folder, let's create `notes_model.dart` file. In this file, let's create NotesModel
+- Inside models folder, let's create `note.dart` file. In this file, let's create Note
   class and extend it from `HiveObject`, annotate this class with `@HiveType(typeId:0)`:
 
 ```dart
 import 'package:hive/hive.dart';
 
-part 'notes_model.g.dart';
+part 'note.g.dart';
 
 @HiveType(typeId: 0)
-class NotesModel extends HiveObject {
+class Note extends HiveObject {
   @HiveField(0)
   String title;
 
   @HiveField(1)
   String description;
 
-  NotesModel({required this.title, required this.description});
+  Note({required this.title, required this.description});
 }
 ```
 
-- Then run following command in terminal to generate `NotesModelAdapter` class:
+- Then run following command in terminal to generate `NoteAdapter` class:
    ```dart
    flutter packages pub run build_runner build
    ```
 - Inside `main.dart`, do widgets binding and initialize hive database.
+    - Initialization is not needed in browser.
     - As we have our own type of box so register it by calling `registerAdapter()` method of hive.
     - After registration, open this box.
 
@@ -484,19 +493,30 @@ class NotesModel extends HiveObject {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Hive.initFlutter(); // -> not needed in browser
+  await Hive.initFlutter();
+  Hive.registerAdapter(NoteAdapter());
 
-  Hive.registerAdapter(NotesModelAdapter());
-
-  await Hive.openBox<NotesModel>('notes');
+  await Hive.openBox<Note>('notes');
 
   runApp(const MyApp());
 }
 ```
 
+- Let's create box class directly separate from the ui screen named `boxes.dart` in boxes folder:
+
+```dart
+import 'package:hive/hive.dart';
+
+import '/models/note.dart';
+
+class Boxes {
+  static Box<Note> getNotes() => Hive.box<Note>('notes');
+}
+```
+
 - Inside `home_screen.dart` file, we are using `ValueListenableBuilder` to refresh data stored in
   Hive. It has two required parameters:
-    - `valueListenable`. We are providing box of type NotesModel and calling `listenable` method of
+    - `valueListenable`. We are providing box of type Note and calling `listenable` method of
       hive database.
     - `builder`. Here we are using listview builder and returning `Card` in the `itemBuilder`.
     - Add button adds the notes box with title and description by calling `.add()` method of hive
@@ -504,6 +524,33 @@ void main() async {
     - Update button updates the notes box by using `.save()` method of hive database on box.
     - Delete button deletes the notes box by using `data[index].delete();` method of hive database
       on box. Where data is following:
-  ```dart
-  final data = box.values.toList().cast<NotesModel>();
-  ``` 
+      ```dart
+      final data = box.values.toList().cast<Note>();
+      ``` 
+    - addNotes method:
+      ```dart
+              final data = Note(
+                title: titleController.text,
+                description: descriptionController.text,
+              );
+
+              final noteBox = NoteBox.getNotes();
+              noteBox.add(data);
+
+              debugPrint(noteBox.length.toString());
+
+              titleController.clear();
+              descriptionController.clear();
+              Navigator.pop(context);
+      
+              // box.put('myKey',data);
+              // data.save();
+      ```
+    - createNoteDialog method:
+      ```dart
+  
+          // var box = await Hive.openBox('testBox');
+          // box.put('name', 'David');
+          // debugPrint('Name: ${box.get('name')}');
+   
+      ```
