@@ -49,11 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               const Spacer(),
                               GestureDetector(
                                 onTap: () {
-                                  showEditNoteDialog(
-                                    note,
-                                    // notes[index].title,
-                                    // notes[index].description,
-                                  );
+                                  showEditNoteDialog(note);
                                 },
                                 child: const Icon(Icons.edit),
                               ),
