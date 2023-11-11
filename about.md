@@ -534,10 +534,10 @@ class Boxes {
                 description: descriptionController.text,
               );
 
-              final noteBox = NoteBox.getNotes();
-              noteBox.add(data);
+              final note = Note.getNotes();
+              note.add(data);
 
-              debugPrint(noteBox.length.toString());
+              debugPrint(note.length.toString());
 
               titleController.clear();
               descriptionController.clear();
@@ -546,11 +546,95 @@ class Boxes {
               // box.put('myKey',data);
               // data.save();
       ```
-    - createNoteDialog method:
+    - showEditOrSaveDialog() method:
       ```dart
-  
-          // var box = await Hive.openBox('testBox');
-          // box.put('name', 'David');
-          // debugPrint('Name: ${box.get('name')}');
-   
+        Future<void> showEditOrSaveDialog(String title, [Note? note]) async {
+          if (note != null) {
+            titleController.text = note.title;
+            descriptionController.text = note.description;
+          }
+          return showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('$title Notes'),
+              content: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: titleController,
+                      decoration: const InputDecoration(
+                        hintText: 'Enter title',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      controller: descriptionController,
+                      decoration: const InputDecoration(
+                        hintText: 'Enter description',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    if (note != null) {
+                      editNote(note);
+                    } else {
+                      saveNote();
+                    }
+                  },
+                  child: Text(title),
+                ),
+              ],
+            ),
+          );
+        }
+        // var box = await Hive.openBox('testBox');
+        // box.put('name', 'David');
+        // debugPrint('Name: ${box.get('name')}');
       ```
+    - saveNote() method:
+      ```dart
+              void saveNote() {
+                final data = Note(
+                  title: titleController.text,
+                  description: descriptionController.text,
+                );
+            
+                final noteBox = Boxes.getNotes();
+                noteBox.add(data);
+                debugPrint(noteBox.length.toString());
+            
+                clearNote();
+                Navigator.pop(context);
+              }
+      ```
+    - editNote() method:
+      ```dart
+              Future<void> editNote(Note note) async {
+                note.title = titleController.text;
+                note.description = descriptionController.text;
+            
+                await note.save();
+                clearNote();
+            
+                if (!context.mounted) return;
+                Navigator.pop(context);
+              }
+      ```
+    - clearNote() method:
+      ```dart
+              void clearNote() {
+                titleController.clear();
+                descriptionController.clear();
+              }
+      ```
+      

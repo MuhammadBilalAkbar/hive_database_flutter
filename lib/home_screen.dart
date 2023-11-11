@@ -45,7 +45,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Row(
                           children: [
-                            Text(note.title),
+                            Text(
+                              note.title,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             const Spacer(),
                             GestureDetector(
                               onTap: () => showEditOrSaveDialog('Update', note),
