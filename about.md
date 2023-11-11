@@ -193,23 +193,13 @@ Flutter. The second one will handle the directory behind the scene for you 👏 
 **Problems from Flutter Stackoverflow**
 
 - https://stackoverflow.com/questions/74951242/getting-an-error-of-register-adapter-in-flutter-using-hive
-- https://stackoverflow.com/questions/71661803/flutter-hive-hive-boxes-are-cleared-but-then-data-is-restored-on-restart
 - https://stackoverflow.com/questions/64944999/how-to-solve-the-box-not-found-error-hive-flutter
 - https://stackoverflow.com/questions/72548100/iam-having-a-problem-with-adding-fields-in-a-hive-model-in-flutter
-- https://stackoverflow.com/questions/67325665/error-retrieving-data-from-hive-in-flutter-listdynamic-is-not-a-subtype-of
-- https://stackoverflow.com/questions/73378909/flutter-hive-dead-lock-code-needs-an-adapter-class-to-run-but-that-adapter
-- https://stackoverflow.com/questions/61832322/problem-while-flutter-build-runner-register-generator-for-using-the-hive-databas
 - https://stackoverflow.com/questions/70614042/flutter-hive-box-not-found-even-though-it-was-opened
 - https://stackoverflow.com/questions/67298056/using-hive-boxuser-throws-the-error-the-box-user-is-already-open-and-of-ty
-- https://stackoverflow.com/questions/68717933/flutter-path-provider-package-error-with-hive-database-and-null-safety
-- https://stackoverflow.com/questions/72546957/when-i-implement-hive-library-for-save-theme-mode-i-have-null-error
-- https://stackoverflow.com/questions/61485627/unable-to-use-hive-plugin-in-flutter
 - https://stackoverflow.com/questions/60257233/the-box-contacts-is-already-open-and-of-type-boxcontact-when-trying-to-acces
 - https://stackoverflow.com/questions/74653907/unhandled-exception-hiveerror-you-need-to-initialize-hive-or-provide-a-path-to
 - https://stackoverflow.com/questions/77060962/hive-type-null-is-not-a-subtype-of-type-string-in-type-cast
-- https://stackoverflow.com/questions/74713206/save-data-from-json-with-flutter-hive
-- https://stackoverflow.com/questions/75901446/facing-rangeerror-not-enough-bytes-available-when-i-try-to-get-values-from-h
-- https://stackoverflow.com/questions/74738686/not-able-to-change-the-postion-of-items-in-hive-database
 - https://stackoverflow.com/questions/74684235/flutter-unhandled-exception-platformexceptionchannel-error-unable-to-establ
 
 ## 3. Video Structure
