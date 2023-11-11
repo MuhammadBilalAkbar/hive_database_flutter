@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: const Icon(Icons.edit),
                             ),
                             const SizedBox(width: 15),
-                            GestureDetector
+                            GestureDetector(
                               onTap: () {
                                 note.delete();
                               },
