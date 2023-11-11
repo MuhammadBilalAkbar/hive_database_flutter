@@ -14,8 +14,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
 
-  // static Box<Note> notes() => Hive.box<Note>('notes');
-
   @override
   void dispose() {
     Hive.close();
