@@ -55,7 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             const Spacer(),
                             GestureDetector(
-                              onTap: () => showEditOrSaveDialog('Update', note),
+                              onTap: () =>
+                                  showEditOrCreateDialog('Update', note),
                               child: const Icon(Icons.edit),
                             ),
                             const SizedBox(width: 15),
@@ -78,12 +79,12 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => showEditOrSaveDialog('Add'),
+          onPressed: () => showEditOrCreateDialog('Add'),
           child: const Icon(Icons.add),
         ),
       );
 
-  Future<void> showEditOrSaveDialog(String title, [Note? note]) async {
+  Future<void> showEditOrCreateDialog(String title, [Note? note]) async {
     if (note != null) {
       titleController.text = note.title;
       descriptionController.text = note.description;
@@ -123,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
               if (note != null) {
                 editNote(note);
               } else {
-                saveNote();
+                createNote();
               }
             },
             child: Text(title),
@@ -144,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.pop(context);
   }
 
-  void saveNote() {
+  void createNote() {
     final data = Note(
       title: titleController.text,
       description: descriptionController.text,
