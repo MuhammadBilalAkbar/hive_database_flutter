@@ -12,3 +12,5 @@ class Note extends HiveObject {
 
   Note({required this.title, required this.description});
 }
+
+// flutter packages pub run build_runner build

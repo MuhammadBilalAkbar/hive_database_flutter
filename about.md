@@ -296,6 +296,9 @@ dropped from memory and the box file is closed after all active read and write o
 
 ### Read from box:
 
+Hive supports all primitive types, List, Map, DateTime, BigInt and Uint8List. Any object can be
+stored using TypeAdapters.
+
 Reading from a box is very easy:
 
 ```dart
@@ -492,7 +495,7 @@ void main() async {
 }
 ```
 
-- Let's create box class directly separate from the ui screen named `boxes.dart` in boxes folder:
+- Let's create box class separate from the ui screen named `boxes.dart` in boxes folder:
 
 ```dart
 import 'package:hive/hive.dart';

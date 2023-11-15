@@ -9,6 +9,16 @@ void main() async {
 
   await Hive.initFlutter();
 
+  final box = await Hive.openBox('name');
+  // box.add(2);
+  // box.add('3');
+  // box.add(true);
+  // box.add([1, 2, 3]);
+  // box.add({
+  //   'one': 1,
+  //   'two': 2,
+  // });
+
   Hive.registerAdapter(NoteAdapter());
   await Hive.openBox<Note>('notes');
 

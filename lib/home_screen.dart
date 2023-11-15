@@ -16,7 +16,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
+    Boxes.getNotes().close();
     Hive.close();
+    titleController.dispose();
+    descriptionController.dispose();
     super.dispose();
   }
 
@@ -57,9 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             const SizedBox(width: 15),
                             GestureDetector(
-                              onTap: () {
-                                note.delete();
-                              },
+                              onTap: () => note.delete(),
                               child: const Icon(
                                 Icons.delete,
                                 color: Colors.red,
@@ -132,6 +133,17 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Future<void> editNote(Note note) async {
+    note.title = titleController.text;
+    note.description = descriptionController.text;
+
+    await note.save();
+    clearNote();
+
+    if (!context.mounted) return;
+    Navigator.pop(context);
+  }
+
   void saveNote() {
     final data = Note(
       title: titleController.text,
@@ -143,17 +155,6 @@ class _HomeScreenState extends State<HomeScreen> {
     debugPrint(noteBox.length.toString());
 
     clearNote();
-    Navigator.pop(context);
-  }
-
-  Future<void> editNote(Note note) async {
-    note.title = titleController.text;
-    note.description = descriptionController.text;
-
-    await note.save();
-    clearNote();
-
-    if (!context.mounted) return;
     Navigator.pop(context);
   }
 
